@@ -5,7 +5,10 @@ const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({
+  origin: ["http://localhost:3000", "http://192.168.1.34:3000"]
+}));
+
 app.use(express.json());
 
 // In-memory post storage
@@ -41,4 +44,8 @@ app.post("/api/posts", (req: Request, res: Response) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`✅ Server is running on http://localhost:${PORT}`);
+});
+
+app.get("/", (_req: Request, res: Response) => {
+  res.send("✅ Bloggies backend is running");
 });
